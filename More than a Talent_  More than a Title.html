@@ -1,0 +1,594 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>More Than a Talent, More Than a Title</title>
+<style>
+:root {
+  color-scheme: dark;
+  --paper: #24171a;
+  --surface: #382126;
+  --ink: #fff2d2;
+  --muted: #dfc8b8;
+  --accent: #e7c879;
+  --line: #80534b;
+  --soft: #49292d;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+}
+button { font: inherit; }
+#app {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 4% 2%, #e7c87920, transparent 25%),
+    radial-gradient(ellipse at 100% 88%, #8d394522, transparent 32%),
+    repeating-linear-gradient(135deg, transparent 0 58px, #e7c87908 59px 61px, transparent 62px 112px),
+    var(--paper);
+}
+main {
+  max-width: 1120px;
+  margin: auto;
+  padding: 0 28px 70px;
+}
+.hero {
+  position: relative;
+  isolation: isolate;
+  padding: 75px 0 55px;
+  max-width: 850px;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 18px -24px 12px;
+  border: 1px solid #e7c87965;
+  border-radius: 25px;
+  background:
+    radial-gradient(ellipse at 4% 5%, #e7c87955, transparent 20%),
+    radial-gradient(ellipse at 94% 94%, #b47b4b32, transparent 32%),
+    repeating-linear-gradient(135deg, transparent 0 38px, #e7c87914 39px 42px, transparent 43px 74px),
+    linear-gradient(120deg, #481b20, #7c3435 45%, #271c25);
+}
+h1, h2, h3 {
+  font-family: Georgia, "Times New Roman", serif;
+}
+h1 {
+  font-size: clamp(3rem, 8vw, 6.4rem);
+  line-height: .98;
+  letter-spacing: -.05em;
+  margin: 20px 0;
+}
+h1 em {
+  color: var(--accent);
+  font-weight: normal;
+  font-style: italic;
+}
+.eyebrow, .choice small, .step-label {
+  color: var(--accent);
+  font-size: .75rem;
+  font-weight: bold;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.lede, .story-intro, .step-copy p,
+.guide-card p, .card-foot {
+  color: var(--muted);
+}
+.lede {
+  max-width: 730px;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+.tagline {
+  display: inline-block;
+  padding: 13px 17px;
+  border: 1px solid #b58b5d;
+  background: #321e23dd;
+  border-radius: 4px 18px 18px;
+  line-height: 1.7;
+}
+.project-guide, .choice-grid {
+  display: grid;
+  gap: 16px;
+}
+.project-guide {
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 36px;
+}
+.guide-card, .choice, .quiz-box, .reflection {
+  border: 1px solid var(--line);
+  background: linear-gradient(145deg, #49272c, #2d1d22);
+  box-shadow: inset 0 0 0 3px #e7c87908;
+}
+.guide-card {
+  padding: 20px;
+  border-radius: 15px 15px 15px 3px;
+}
+.guide-card h3 {
+  font-weight: normal;
+  font-size: 1.4rem;
+}
+.guide-card p {
+  line-height: 1.7;
+  font-size: .9rem;
+}
+.choice-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  font-weight: normal;
+}
+.choice-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+.choice {
+  color: var(--ink);
+  text-align: left;
+  padding: 26px;
+  min-height: 245px;
+  border-color: #a87958;
+  border-radius: 18px 18px 18px 4px;
+  cursor: pointer;
+  transition: transform .2s, border-color .2s;
+}
+.choice:hover, .choice:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+.choice-icon {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+.choice strong {
+  display: block;
+  font: normal clamp(1.4rem, 3vw, 2rem) Georgia, serif;
+  line-height: 1.25;
+  margin: 12px 0 20px;
+}
+.card-foot { font-size: .9rem; }
+.notice, .callout {
+  margin-top: 24px;
+  padding: 18px 20px;
+  background: var(--soft);
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
+  line-height: 1.7;
+}
+.story { padding-top: 40px; }
+.back, .secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 12px 17px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.story-head {
+  padding: 30px 0;
+  border-bottom: 1px solid var(--line);
+}
+.story-head h2 {
+  font-size: clamp(2.3rem, 6vw, 4.5rem);
+  line-height: 1.05;
+}
+.story-intro {
+  max-width: 760px;
+  line-height: 1.8;
+}
+.progress {
+  display: flex;
+  gap: 8px;
+  margin-top: 25px;
+}
+.progress span {
+  width: 38px;
+  height: 4px;
+  background: var(--line);
+  border-radius: 5px;
+}
+.progress span.active { background: var(--accent); }
+.quiz-box {
+  margin: 30px 0;
+  padding: clamp(22px, 4vw, 36px);
+  border-radius: 22px 22px 22px 5px;
+}
+.quiz-kicker {
+  color: var(--accent);
+  font-weight: bold;
+  letter-spacing: .12em;
+  font-size: .75rem;
+}
+.quiz-box h3 {
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+}
+.quiz-options {
+  display: grid;
+  gap: 10px;
+}
+.quiz-answer {
+  text-align: left;
+  padding: 15px;
+  background: #28191e;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 4px 13px 13px;
+  cursor: pointer;
+  line-height: 1.5;
+}
+.quiz-answer:hover, .quiz-answer[aria-pressed="true"] {
+  border-color: var(--accent);
+}
+.quiz-feedback {
+  margin-top: 16px;
+  padding: 15px;
+  background: var(--soft);
+  line-height: 1.7;
+  border-radius: 12px;
+}
+.step-panel {
+  display: grid;
+  grid-template-columns: .72fr 1.28fr;
+  gap: 42px;
+  padding: 35px 0;
+  border-bottom: 1px solid var(--line);
+}
+.step-panel h3 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: normal;
+  line-height: 1.1;
+}
+.step-copy p { line-height: 1.85; }
+.callout {
+  color: var(--ink);
+  border: 1px solid #80534b;
+  border-left: 3px solid var(--accent);
+  border-radius: 4px 12px 12px 12px;
+}
+.story-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 25px;
+}
+.primary {
+  background: linear-gradient(135deg, #f0d995, #c79b4f);
+  color: #32191d;
+  border: 1px solid var(--accent);
+  padding: 13px 20px;
+  border-radius: 999px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.reflection {
+  margin-top: 40px;
+  padding: clamp(24px, 5vw, 44px);
+  border-radius: 18px 18px 18px 4px;
+}
+.reflection h3 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: normal;
+}
+.reflection p {
+  line-height: 1.8;
+  color: var(--muted);
+}
+[hidden] { display: none !important; }
+@media (max-width: 700px) {
+  main { padding-left: 20px; padding-right: 20px; }
+  .project-guide, .choice-grid, .step-panel {
+    grid-template-columns: 1fr;
+  }
+  .step-panel { gap: 12px; }
+  .choice { min-height: 210px; }
+}
+</style>
+</head>
+<body>
+<div id="app">
+<main>
+<section id="landing">
+  <div class="hero">
+    <div class="eyebrow">Identity · History · Perspective</div>
+    <h1>More Than a <em>Talent</em>,<br>More Than a <em>Title</em>.</h1>
+    <p class="lede">Filipino identity is bigger than one talent, one job, or one familiar story. Let’s break down two common stereotypes, where they came from, and what they get wrong.</p>
+    <p class="tagline">✳ Do you think you know the full story? Choose a path below to see what's really behind the stereotype.</p>
+  </div>
+
+  <section class="project-guide">
+    <article class="guide-card">
+      <div class="eyebrow">01 · The stereotype</div>
+      <h3>What people assume</h3>
+      <p>Explore how common ideas about singing or nursing turn into expectations for Filipinos.</p>
+    </article>
+    <article class="guide-card">
+      <div class="eyebrow">02 · The history</div>
+      <h3>Where it comes from</h3>
+      <p>Learn how culture, music, education, migration, and job trends created these familiar ideas.</p>
+    </article>
+    <article class="guide-card">
+      <div class="eyebrow">03 · The impact</div>
+      <h3>What gets missed</h3>
+      <p>Learn about how positive stereotypes can still limit people, and why everyone deserves to choose their own path.</p>
+    </article>
+  </section>
+
+  <div class="choice-heading">
+    <h2>Pick your path</h2>
+    <span class="eyebrow">02 paths · 1 bigger picture</span>
+  </div>
+
+  <div class="choice-grid">
+    <button class="choice" data-story="singing">
+      <span class="choice-icon">🎤</span>
+      <small>Path 01 · The mic</small>
+      <strong>“Every Filipino is a phenomenal singer.”</strong>
+      <span class="card-foot">Quick quiz + the story behind the music →</span>
+    </button>
+    <button class="choice" data-story="nursing">
+      <span class="choice-icon">🏥</span>
+      <small>Path 02 · On Duty</small>
+      <strong>“Most Filipinos work as nurses.”</strong>
+      <span class="card-foot">Quick quiz + the story behind the career →</span>
+    </button>
+  </div>
+
+  <div class="notice">
+    <strong>Quick reminder:</strong> These statements are stereotypes and don't apply to every Filipino. Music and nursing are great, but there is so much more to who people are.
+  </div>
+</section>
+
+<section id="story" class="story" hidden aria-live="polite">
+  <button id="backButton" class="back">← Back to both stories</button>
+
+  <div class="story-head">
+    <div id="storyEyebrow" class="eyebrow"></div>
+    <h2 id="storyTitle"></h2>
+    <p id="storyIntro" class="story-intro"></p>
+    <div class="progress">
+      <span class="active"></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <section class="quiz-box" id="quizBox">
+    <div class="quiz-kicker">FIRST, A QUICK CHECK ✨</div>
+    <h3 id="quizQuestion"></h3>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="quiz-feedback" id="quizFeedback" hidden></div>
+    <div class="story-actions">
+      <button class="primary" id="continueStory" hidden>Okay, show me the full story →</button>
+    </div>
+  </section>
+
+  <div id="stepList" hidden></div>
+
+  <div class="reflection" hidden>
+    <div class="eyebrow">TAKE IT WITH YOU</div>
+    <h3>One identity. Many stories.</h3>
+    <p id="reflectionText"></p>
+    <p>Before you leave, ask yourself: <strong>Am I seeing the whole person, or just the label I’ve gotten used to seeing?</strong></p>
+    <div class="story-actions">
+      <button class="primary" id="otherStory">Explore the other story →</button>
+      <button class="secondary" id="homeButton">Return to the beginning</button>
+    </div>
+  </div>
+</section>
+</main>
+</div>
+
+<script>
+const stories = {
+  singing: {
+    eyebrow: "Story one · The mic",
+    title: "Is every Filipino a phenomenal singer?",
+    intro: "Music is a big part of Filipino culture and gatherings. But loving music doesn't mean every Filipino is a great singer or even wants to sing.",
+    reflection: "Filipinos can love music, hate singing, or anything in between. Their talents and interests belong to them as individuals—not their background.",
+    quiz: {
+      question: "Quick vibe check: which statement is the fairest?",
+      options: [
+        "Singing talent is in every Filipino’s DNA.",
+        "Music can be important in a culture, but talent and interests differ by person.",
+        "If someone is Filipino, they should enjoy karaoke."
+      ],
+      correct: 1,
+      feedback: "Exactly! Cultural traditions bring people together, but they don't decide what someone is good at or what they like to do.",
+      feedbackWrong: "Not quite! Traditions matter, but they don't define everyone. Culture isn't a test of talent."
+    },
+    steps: [
+      {
+        label: "01 · Myth vs. reality",
+        title: "A familiar image is not true for everyone.",
+        paragraphs: [
+          "The stereotype assumes every Filipino is a natural singer. Even if it sounds like a compliment, it still puts pressure on people before they can show who they really are.",
+          "Reality: Some Filipinos are talented singers, some get better with practice, and others don't care for singing at all. No single skill describes a whole community."
+        ],
+        callout: "A positive-sounding stereotype can still limit people when it turns  a personal skill into an expectation for everyone."
+      },
+      {
+        label: "02 · Historical roots",
+        title: "Music travels, changes, and brings people together.",
+        paragraphs: [
+          "The Philippines has a rich history of local musical traditions. Over time, these traditions were influenced by Spanish and American history, radio, movies, and music from around the world.",
+          "Karaoke and group singing are now popular at many parties and family gatherings. This helps explain why music is such a big part of Filipino community life, but it doesn't mean singing skill is in someone's DNA or true for everyone."
+        ],
+        callout: "Culture can encourage people to join in and practice a skill. It doesn't mean everyone is born with the same talent."
+      },
+      {
+        label: "03 · Impact & Realities",
+        title: "People deserve room to be more than one thing.",
+        paragraphs: [
+          "When people expect every Filipino to sing well, someone who is shy, uninterested, or not confident can feel judged or pressured. Even a light joke can make someone feel like they aren't 'Filipino enough' just because they don't sing.",
+          "Filipinos follow all kinds of dreams and careers such as science, coding, sports, teaching, business, and art. Skills come from interest, hard work, and practice. Your background doesn't choose them for you."
+        ],
+        callout: "Try replacing “Filipinos are natural singers” with “Music is a big part of Filipino culture, but everyone is unique.”"
+      }
+    ]
+  },
+
+  nursing: {
+    eyebrow: "Story two · On Duty",
+    title: "Do most Filipinos work as nurses?",
+    intro: "Filipino nurses have made a huge contributions in healthcare both in the Philippines and across the globe. The issue starts when people expect every Filipino to follow this same path.",
+    reflection: "Nursing is important work, but it’s just one job among many. Filipinos have all kinds of different goals, talents, and paths. No one should have to fit into one single job to be respected.",
+    quiz: {
+      question: "History pop quiz: what helped shape Filipino nurses’ visibility abroad?",
+      options: [
+        "A natural preference for one career shared by all Filipinos.",
+        "Education systems, migration pathways, and international demand for healthcare workers.",
+        "A rule that Filipino people had to become nurses."
+      ],
+      correct: 1,
+      feedback: "You got it! Education, migration, and hospital hiring all helped shape this history. But that doesn't mean nursing is the main job for every Filipino",
+      feedbackWrong: "The real story comes down to history and money, and not something Filipinos are born to do. Schooling, job opportunities abroad, and hospital hiring are what created this trend."
+    },
+    steps: [
+      {
+        label: "01 · Myth vs. reality",
+        title: "A visible profession is not everyone’s profession.",
+        paragraphs: [
+          "The stereotype makes it seem like nursing is the expected job for every Filipino. It leaves out the many people who work in other fields or are exploring new possibilities. ",
+          "Reality: Filipinos work in tech, teaching, law, art, business, trade skills, public service, and so much more. Nursing matters, but it's only a part of a bigger picture."
+        ],
+        callout: "We can honor nurses without expecting every Filipino to become one."
+      },
+      {
+        label: "02 · Historical roots",
+        title: "History and job opportunities created this path.",
+        paragraphs: [
+          "When the U.S. ruled the Philippines, American-style nursing schools and English training were introduced. This prepared many nurses to work both locally and in international healthcare systems.",
+          "Later, changes to U.S. immigration laws like the 1965 Immigration Act opened up new paths for skilled workers to move abroad. Hospitals started recruiting Filipino nurses to fill staffing shortages. This history explains why Filipino nurses are so well known today, but it doesn't mean Filipinos are born to be nurses."
+        ],
+        callout: "A trend created by history and economics is not a natural rule for everyone."
+      },
+      {
+        label: "03 · Impact & Realities",
+        title: "Recognition should not box people in.",
+        paragraphs: [
+          "This stereotype can limit how people see Filipino workers and put pressure on students to choose healthcare jobs. It can also hide the struggles that internationally trained nurses face when trying to get their licenses approved or move into higher roles in a new country.",
+          "Many skilled workers end up in jobs below their skill level because their degrees aren't recognized. At the same time, Filipinos excel in all kinds of careers, and their talents go far beyond a single job."
+        ],
+        callout: "Respect Filipino nurses, but make space for every other passion and goal."
+      }
+    ]
+  }
+};
+
+let activeStory = "singing";
+let quizPassed = false;
+
+function renderQuiz(data) {
+  quizPassed = false;
+  document.getElementById("quizQuestion").textContent = data.quiz.question;
+
+  document.getElementById("quizOptions").innerHTML =
+    data.quiz.options.map((option, index) =>
+      `<button class="quiz-answer" type="button" data-answer="${index}" aria-pressed="false">${option}</button>`
+    ).join("");
+
+  document.getElementById("quizFeedback").hidden = true;
+  document.getElementById("continueStory").hidden = true;
+  document.getElementById("stepList").hidden = true;
+  document.querySelector(".reflection").hidden = true;
+  document.getElementById("quizBox").hidden = false;
+
+  document.querySelectorAll(".quiz-answer").forEach(button => {
+    button.addEventListener("click", () => {
+      const correct = Number(button.dataset.answer) === data.quiz.correct;
+
+      document.querySelectorAll(".quiz-answer").forEach(option => {
+        option.setAttribute("aria-pressed", String(option === button));
+      });
+
+      const feedback = document.getElementById("quizFeedback");
+      feedback.textContent = correct ? data.quiz.feedback : data.quiz.feedbackWrong;
+      feedback.hidden = false;
+      document.getElementById("continueStory").hidden = false;
+      quizPassed = true;
+    });
+  });
+}
+
+function renderStory(key) {
+  activeStory = key;
+  const data = stories[key];
+
+  document.getElementById("landing").hidden = true;
+  document.getElementById("story").hidden = false;
+  document.getElementById("storyEyebrow").textContent = data.eyebrow;
+  document.getElementById("storyTitle").textContent = data.title;
+  document.getElementById("storyIntro").textContent = data.intro;
+  document.getElementById("reflectionText").textContent = data.reflection;
+
+  document.getElementById("stepList").innerHTML = data.steps.map(step =>
+    `<section class="step-panel">
+      <div>
+        <div class="step-label">${step.label}</div>
+        <h3>${step.title}</h3>
+      </div>
+      <div class="step-copy">
+        ${step.paragraphs.map(paragraph => `<p>${paragraph}</p>`).join("")}
+        <div class="callout">${step.callout}</div>
+      </div>
+    </section>`
+  ).join("");
+
+  document.querySelectorAll(".progress span").forEach((bar, index) => {
+    bar.classList.toggle("active", index === 0);
+  });
+
+  renderQuiz(data);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function revealStory() {
+  if (!quizPassed) return;
+
+  document.getElementById("quizBox").hidden = true;
+  document.getElementById("stepList").hidden = false;
+  document.querySelector(".reflection").hidden = false;
+
+  document.querySelectorAll(".progress span").forEach(bar => {
+    bar.classList.add("active");
+  });
+
+  document.getElementById("stepList").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+function goHome() {
+  document.getElementById("story").hidden = true;
+  document.getElementById("landing").hidden = false;
+  document.getElementById("quizBox").hidden = false;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.querySelectorAll("[data-story]").forEach(button => {
+  button.addEventListener("click", () => renderStory(button.dataset.story));
+});
+
+document.getElementById("backButton").addEventListener("click", goHome);
+document.getElementById("homeButton").addEventListener("click", goHome);
+
+document.getElementById("otherStory").addEventListener("click", () => {
+  renderStory(activeStory === "singing" ? "nursing" : "singing");
+});
+
+document.getElementById("continueStory").addEventListener("click", revealStory);
+</script>
+</body>
+</html>
